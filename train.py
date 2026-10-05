@@ -94,16 +94,11 @@ def main():
         num_train_epochs=args.epochs,
         max_steps=args.max_steps,
         per_device_train_batch_size=args.batch_size,
-        per_device_eval_batch_size=args.batch_size,
         gradient_accumulation_steps=args.grad_accum,
         learning_rate=args.lr,
         fp16=True,
         logging_steps=10,
-        eval_strategy="steps",
-        eval_steps=100,
         save_strategy="no",
-        warmup_ratio=0.03,
-        lr_scheduler_type="cosine",
         report_to="wandb",
         run_name=f"{args.model.split('/')[-1]}-samsum-lora",
     )
@@ -116,7 +111,6 @@ def main():
         model=model,
         args=targs,
         train_dataset=train_ds,
-        eval_dataset=eval_ds,
         data_collator=collator,
     )
     trainer.train()
