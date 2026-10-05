@@ -1,0 +1,7 @@
+transformers>=4.44
+peft>=0.12
+datasets>=2.20
+accelerate>=0.33
+evaluate
+rouge_score
+wandb
