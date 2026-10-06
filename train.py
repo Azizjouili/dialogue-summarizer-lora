@@ -85,7 +85,6 @@ def main():
     ds = load_dataset(args.dataset)
     tok_fn = build_tokenize_fn(tokenizer, args.max_len)
     train_ds = ds["train"].map(tok_fn, batched=True, remove_columns=ds["train"].column_names)
-    eval_ds = ds["validation"].map(tok_fn, batched=True, remove_columns=ds["validation"].column_names)
 
     collator = DataCollatorForSeq2Seq(tokenizer, padding="longest", label_pad_token_id=-100)
 

@@ -1,17 +1,38 @@
 [project]
 name = "dialogue-summarizer-lora"
 version = "0.1.0"
-description = "Add your description here"
+description = "LoRA-fine-tuned Qwen2.5-0.5B dialogue summarizer with a FastAPI service."
+requires-python = ">=3.11"
 readme = "README.md"
 authors = [
     { name = "ge78huc", email = "ge78huc@tum.de" }
 ]
-requires-python = ">=3.12"
-dependencies = []
 
-[project.scripts]
-dialogue-summarizer-lora = "dialogue_summarizer_lora:main"
+dependencies = [
+    "torch>=2.4",
+    "transformers>=4.44",
+    "peft>=0.12",
+    "fastapi>=0.115",
+    "uvicorn>=0.30",
+    "pydantic>=2.8",
+]
 
-[build-system]
-requires = ["uv_build>=0.12.22,<0.13.0"]
-build-backend = "uv_build"
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+    "httpx>=0.27",
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[tool.ruff]
+line-length = 100
+[tool.pytest.ini_options]
+pythonpath = ["."]
